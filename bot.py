@@ -1,9 +1,10 @@
 import asyncio
 import discord
+from discord.ext import commands
+import os
+
 
 app = discord.Client()
-
-token = "ODI0MzA4NTY1Mzg0MjMzMDAw.YFtfLA.b9mIkRX1pSrXxY8PhD8lr9ZWsOI"
 
 @app.event
 async def on_ready():
@@ -23,4 +24,4 @@ async def on_message(message):
     if message.content == "!안녕":
         await message.channel.send("안녕하세요.")
 
-app.run(token)
+app.run(os.environ['token'])
