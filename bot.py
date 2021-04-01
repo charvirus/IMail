@@ -1,17 +1,26 @@
+import asyncio
 import discord
-from discord.ext import commands
-import os
 
-client = commands.Bot(command_prefix='-')
+app = discord.Client()
 
+token = "ODI0MzA4NTY1Mzg0MjMzMDAw.YFtfLA.b9mIkRX1pSrXxY8PhD8lr9ZWsOI"
 
-@client.event
+@app.event
 async def on_ready():
-    await client.change_presence(status=discord.Status.online)
+    print("다음으로 로그인합니다 : ")
+    print(app.user.name)
+    print(app.user.id)
+    print("==========")
+    game = discord.Game("안녕하세요 :)")
+    await app.change_presence(status=discord.Status.online, activity=game)
 
-    await client.change_presence(activity=discord.Game(name="대기"))
-
-    print("봇 이름:", client.user.name, "봇 아이디:", client.user.id, "봇 버전:", discord.__version__)
 
 
-client.run(os.environ['token'])
+@app.event
+async def on_message(message):
+    if message.author.bot:
+        return None
+    if message.content == "!안녕":
+        await message.channel.send("안녕하세요.")
+
+app.run(token)
