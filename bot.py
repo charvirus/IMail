@@ -12,8 +12,7 @@ async def on_ready():
     print(app.user.name)
     print(app.user.id)
     print("==========")
-    game = discord.Game("안녕하세요 :)")
-    await app.change_presence(status=discord.Status.online, activity=game)
+    await app.change_presence(status=discord.Status.online)
 
 
 
